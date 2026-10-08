@@ -1,4 +1,3 @@
-```python
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -218,4 +217,3 @@ def ask_ai(request: ChatRequest):
             status_code=500,
             detail="Unable to process your question."
         )
-```
