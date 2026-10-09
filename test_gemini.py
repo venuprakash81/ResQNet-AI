@@ -5,16 +5,19 @@ from google import genai
 
 load_dotenv()
 
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+api_key = os.getenv("GEMINI_API_KEY")
 
-try:
-    print("Checking available Gemini models...\n")
+if not api_key:
+    print("ERROR: GEMINI_API_KEY is missing.")
+else:
+    try:
+        client = genai.Client(api_key=api_key)
 
-    for model in client.models.list():
-        if "generateContent" in (model.supported_actions or []):
-            print(model.name)
+        print("Checking available Gemini models...\n")
 
-except Exception as error:
-    print("Error:", error)
+        for model in client.models.list():
+            if "generateContent" in (model.supported_actions or []):
+                print(model.name)
+
+    except Exception as error:
+        print("Error:", error)
